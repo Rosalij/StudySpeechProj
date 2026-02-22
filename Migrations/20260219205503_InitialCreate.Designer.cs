@@ -8,11 +8,11 @@ using StudySpeech.Data;
 
 #nullable disable
 
-namespace StudySpeech.Data.Migrations
+namespace StudySpeech.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260219152845_StudySpeech")]
-    partial class StudySpeech
+    [Migration("20260219205503_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -237,11 +237,48 @@ namespace StudySpeech.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.ToTable("Notes");
+                });
 
-                    b.ToTable("NoteModel");
+            modelBuilder.Entity("StudySpeech.Models.NoteTagModel", b =>
+                {
+                    b.Property<int>("NoteId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("TagModelId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("NoteId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.HasIndex("TagModelId");
+
+                    b.ToTable("NoteTags");
+                });
+
+            modelBuilder.Entity("StudySpeech.Models.TagModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -295,15 +332,37 @@ namespace StudySpeech.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudySpeech.Models.NoteModel", b =>
+            modelBuilder.Entity("StudySpeech.Models.NoteTagModel", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                    b.HasOne("StudySpeech.Models.NoteModel", "Note")
+                        .WithMany("NoteTags")
+                        .HasForeignKey("NoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.HasOne("StudySpeech.Models.TagModel", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StudySpeech.Models.TagModel", null)
+                        .WithMany("NoteTags")
+                        .HasForeignKey("TagModelId");
+
+                    b.Navigation("Note");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("StudySpeech.Models.NoteModel", b =>
+                {
+                    b.Navigation("NoteTags");
+                });
+
+            modelBuilder.Entity("StudySpeech.Models.TagModel", b =>
+                {
+                    b.Navigation("NoteTags");
                 });
 #pragma warning restore 612, 618
         }
