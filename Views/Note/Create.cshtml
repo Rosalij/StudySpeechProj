@@ -1,28 +1,45 @@
 @model StudySpeech.Models.NoteModel
-
+@*
+    This view is used to create a new note. It provides a form for entering the note's title, content, folder, and tags.
+*@
 @{
     ViewData["Title"] = "Create Note";
 }
 
-<h1>Create Note</h1>
+<div class="mx-auto max-w-lg rounded-xl bg-white p-6 shadow-sm">
+    <h1 class="text-xl font-bold text-teal-900">Create Note</h1>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="Title"></label>
-        <input asp-for="Title" class="form-control" />
-    </div>
+    <form asp-action="Create" method="post" class="mt-4 flex flex-col gap-4">
+        <div>
+            <label asp-for="Title" class="mb-1 block text-sm font-medium text-gray-700"></label>
+            <input asp-for="Title" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-300" />
+            <span asp-validation-for="Title" class="text-sm text-red-600"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Content"></label>
-        <textarea asp-for="Content" class="form-control"></textarea>
-    </div>
+        <div>
+            <label asp-for="Content" class="mb-1 block text-sm font-medium text-gray-700"></label>
+            <textarea asp-for="Content" rows="6" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-300"></textarea>
+            <span asp-validation-for="Content" class="text-sm text-red-600"></span>
+        </div>
 
-    <div class="form-group">
-        <label>Tags</label>
-        <select asp-for="NoteTags" asp-items="ViewBag.Tags" class="form-control" multiple>
-        </select>
-    </div>
+        <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Folder</label>
+            <select asp-for="FolderId" asp-items="ViewBag.Folders"
+                    class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-300">
+                <option value="">-- No folder --</option>
+            </select>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+        <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Tags</label>
+            <select asp-for="SelectedTagIds" asp-items="ViewBag.Tags" multiple
+                    class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-300">
+            </select>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button type="submit" class="rounded-full bg-teal-800 px-5 py-2 text-sm font-medium text-white hover:bg-teal-900">Create</button>
+            <a asp-action="Index" class="text-sm text-gray-600 hover:text-gray-900">Cancel</a>
+        </div>
+    </form>
+</div>

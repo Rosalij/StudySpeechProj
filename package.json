@@ -1,0 +1,27 @@
+{
+  "name": "studyspeechproj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./styles/tailwind.css -o ./wwwroot/css/site.css --minify",
+    "watch:css": "tailwindcss -i ./styles/tailwind.css -o ./wwwroot/css/site.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rosalij/StudySpeechProj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Rosalij/StudySpeechProj/issues"
+  },
+  "homepage": "https://github.com/Rosalij/StudySpeechProj#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

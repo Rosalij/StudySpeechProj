@@ -213,6 +213,25 @@ namespace StudySpeech.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("StudySpeech.Models.FolderModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Folders");
+                });
+
             modelBuilder.Entity("StudySpeech.Models.NoteModel", b =>
                 {
                     b.Property<int>("Id")
@@ -225,6 +244,12 @@ namespace StudySpeech.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("FolderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsSample")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -239,6 +264,8 @@ namespace StudySpeech.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FolderId");
 
                     b.ToTable("Notes");
                 });
@@ -270,6 +297,10 @@ namespace StudySpeech.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -329,6 +360,16 @@ namespace StudySpeech.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("StudySpeech.Models.NoteModel", b =>
+                {
+                    b.HasOne("StudySpeech.Models.FolderModel", "Folder")
+                        .WithMany("Notes")
+                        .HasForeignKey("FolderId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Folder");
+                });
+
             modelBuilder.Entity("StudySpeech.Models.NoteTagModel", b =>
                 {
                     b.HasOne("StudySpeech.Models.NoteModel", "Note")
@@ -350,6 +391,11 @@ namespace StudySpeech.Migrations
                     b.Navigation("Note");
 
                     b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("StudySpeech.Models.FolderModel", b =>
+                {
+                    b.Navigation("Notes");
                 });
 
             modelBuilder.Entity("StudySpeech.Models.NoteModel", b =>

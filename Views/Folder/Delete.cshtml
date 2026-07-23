@@ -1,0 +1,18 @@
+@model StudySpeech.Models.FolderModel
+
+@{
+    ViewData["Title"] = "Delete Folder";
+}
+@*
+    This view is used to confirm the deletion of a folder. It displays the folder name and asks the user for confirmation before proceeding with the deletion.
+*@
+<div class="mx-auto max-w-lg rounded-xl bg-white p-6 shadow-sm">
+    <h1 class="text-xl font-bold text-red-700">Delete Folder</h1>
+    <h3 class="mt-1 text-sm text-gray-600">Are you sure you want to delete "@Model?.Name"? Notes inside it will not be deleted, just unfiled.</h3>
+
+    <form asp-action="Delete" method="post" class="mt-4 flex items-center gap-3">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="rounded-full bg-red-600 px-5 py-2 text-sm font-medium text-white hover:bg-red-700" />
+        <a asp-action="Index" class="text-sm text-gray-600 hover:text-gray-900">Back to List</a>
+    </form>
+</div>

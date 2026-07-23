@@ -1,26 +1,26 @@
-﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
+@* This partial view displays the login/logout links based on the user's authentication status. *@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
+<ul class="flex flex-col items-start gap-2 text-sm font-medium text-teal-800 sm:flex-row sm:items-center sm:gap-4">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+    <li>
+        <a class="flex items-center gap-2 hover:text-teal-950" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+            <span class="flex h-6 w-6 items-center justify-center rounded-full bg-teal-200 text-xs text-teal-900">@User.Identity?.Name?.Substring(0, 1).ToUpper()</span>
+            Hello @User.Identity?.Name!
+        </a>
     </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    <li>
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="text-teal-800 hover:text-teal-950">Logout</button>
         </form>
     </li>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+    <li><a class="hover:text-teal-950" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+    <li><a class="hover:text-teal-950" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
 }
 </ul>

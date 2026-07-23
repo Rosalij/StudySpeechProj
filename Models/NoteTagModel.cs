@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-
+// Represents the model for a note-tag relationship, containing properties for note ID, tag ID, and navigation properties for the associated note and tag.
 namespace StudySpeech.Models {
 public class NoteTagModel
 {

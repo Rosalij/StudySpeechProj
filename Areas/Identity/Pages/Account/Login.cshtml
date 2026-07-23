@@ -1,0 +1,77 @@
+@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="mx-auto max-w-2xl rounded-xl bg-white p-6 shadow-sm">
+    <h1 class="text-xl font-bold text-indigo-900">@ViewData["Title"]</h1>
+    <div class="mt-4 flex flex-col gap-8 md:flex-row">
+        <section class="flex-1">
+            <form id="account" method="post" class="flex flex-col gap-4">
+                <h2 class="text-sm text-gray-600">Use a local account to log in.</h2>
+                <div asp-validation-summary="ModelOnly" class="text-sm text-red-600" role="alert"></div>
+                <div>
+                    <label asp-for="Input.Email" class="mb-1 block text-sm font-medium text-gray-700">Email</label>
+                    <input asp-for="Input.Email" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <span asp-validation-for="Input.Email" class="text-sm text-red-600"></span>
+                </div>
+                <div>
+                    <label asp-for="Input.Password" class="mb-1 block text-sm font-medium text-gray-700">Password</label>
+                    <input asp-for="Input.Password" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <span asp-validation-for="Input.Password" class="text-sm text-red-600"></span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <input class="h-4 w-4 rounded border-gray-300 accent-indigo-800" asp-for="Input.RememberMe" />
+                    <label asp-for="Input.RememberMe" class="text-sm font-medium text-gray-700">
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-full rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Log in</button>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <p>
+                        <a id="forgot-password" class="text-sm text-indigo-700 hover:underline" asp-page="./ForgotPassword">Forgot your password?</a>
+                    </p>
+                    <p>
+                        <a class="text-sm text-indigo-700 hover:underline" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                    </p>
+                    <p>
+                        <a id="resend-confirmation" class="text-sm text-indigo-700 hover:underline" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+        <section class="flex-1">
+            <h3 class="font-semibold text-indigo-900">Use another service to log in.</h3>
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p class="mt-2 text-sm text-gray-600">
+                            There are no external authentication services configured. See this <a class="text-indigo-700 hover:underline" href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="mt-2">
+                        <div class="flex flex-wrap gap-2">
+                            @foreach (var provider in Model.ExternalLogins!)
+                            {
+                                <button type="submit" class="rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                            }
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,30 @@
+@model IEnumerable<StudySpeech.Models.FolderModel>
+
+@{
+    ViewData["Title"] = "Folders";
+}
+@*
+    This view displays a list of all folders.
+*@
+<div class="mx-auto max-w-lg rounded-xl bg-white p-6 shadow-sm">
+    <div class="flex items-center justify-between">
+        <h1 class="text-xl font-bold text-teal-900">Folders</h1>
+        <a asp-action="Create" class="rounded-full bg-teal-800 px-4 py-2 text-sm font-medium text-white hover:bg-teal-900">Create New</a>
+    </div>
+
+    <ul class="mt-4 divide-y divide-gray-100">
+        @if (!Model.Any())
+        {
+            <li class="py-2 text-sm italic text-gray-500">No folders yet</li>
+        }
+        @foreach (var item in Model)
+        {
+            <li class="flex items-center justify-between py-2 text-sm">
+                <span class="text-gray-900">@item.Name</span>
+                <span class="flex items-center gap-3">
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-red-600 hover:underline">Delete</a>
+                </span>
+            </li>
+        }
+    </ul>
+</div>

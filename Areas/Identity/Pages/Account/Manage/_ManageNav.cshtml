@@ -1,0 +1,15 @@
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="flex flex-col gap-1">
+    <li><a class="block rounded-md px-3 py-2 text-sm @(ManageNavPages.IndexNavClass(ViewContext) == "active" ? "bg-indigo-100 font-semibold text-indigo-950" : "text-indigo-800 hover:bg-indigo-50")" id="profile" asp-page="./Index">Profile</a></li>
+    <li><a class="block rounded-md px-3 py-2 text-sm @(ManageNavPages.EmailNavClass(ViewContext) == "active" ? "bg-indigo-100 font-semibold text-indigo-950" : "text-indigo-800 hover:bg-indigo-50")" id="email" asp-page="./Email">Email</a></li>
+    <li><a class="block rounded-md px-3 py-2 text-sm @(ManageNavPages.ChangePasswordNavClass(ViewContext) == "active" ? "bg-indigo-100 font-semibold text-indigo-950" : "text-indigo-800 hover:bg-indigo-50")" id="change-password" asp-page="./ChangePassword">Password</a></li>
+    @if (hasExternalLogins)
+    {
+        <li id="external-logins"><a id="external-login" class="block rounded-md px-3 py-2 text-sm @(ManageNavPages.ExternalLoginsNavClass(ViewContext) == "active" ? "bg-indigo-100 font-semibold text-indigo-950" : "text-indigo-800 hover:bg-indigo-50")" asp-page="./ExternalLogins">External logins</a></li>
+    }
+    <li><a class="block rounded-md px-3 py-2 text-sm @(ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext) == "active" ? "bg-indigo-100 font-semibold text-indigo-950" : "text-indigo-800 hover:bg-indigo-50")" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
+    <li><a class="block rounded-md px-3 py-2 text-sm @(ManageNavPages.PersonalDataNavClass(ViewContext) == "active" ? "bg-indigo-100 font-semibold text-indigo-950" : "text-indigo-800 hover:bg-indigo-50")" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+</ul>

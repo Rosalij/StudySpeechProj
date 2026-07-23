@@ -1,54 +1,56 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+@* This is the main layout file for the application. 
+it contains the common structure and styling for all pages. *@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StudySpeech</title>
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/StudySpeech.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StudySpeech</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Note" asp-action="Index">Notes</a>
-                        </li>                
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tag" asp-action="Index">Tags</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+<body class="flex min-h-screen flex-col bg-teal-50/60 text-gray-900">
+    <header class="border-b border-gray-200 bg-white">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+            <a class="text-xl font-bold text-teal-900" asp-area="" asp-controller="Home" asp-action="Index">StudySpeech</a>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - StudySpeech - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <button id="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"
+                    class="rounded-md p-2 text-teal-900 hover:bg-teal-100 sm:hidden">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+
+            <div id="nav-menu" class="hidden w-full flex-col gap-4 sm:flex sm:w-auto sm:flex-row sm:items-center sm:gap-8">
+                <ul class="flex flex-col gap-2 text-sm font-medium text-teal-800 sm:flex-row sm:items-center sm:gap-6">
+                    <li><a class="hover:text-teal-950" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a class="hover:text-teal-950" asp-area="" asp-controller="Note" asp-action="Index">Notes</a></li>
+                    <li><a class="hover:text-teal-950" asp-area="" asp-controller="Folder" asp-action="Index">Folders</a></li>
+                    <li><a class="hover:text-teal-950" asp-area="" asp-controller="Tag" asp-action="Index">Tags</a></li>
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
         </div>
+    </header>
+
+    <main role="main" class="mx-auto w-full max-w-6xl flex-1 px-4 py-6">
+        @RenderBody()
+    </main>
+
+    <footer class="border-t border-gray-200 py-4 text-center text-sm text-gray-500">
+        &copy; 2026 - StudySpeech - <a class="hover:text-teal-700" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            var menu = document.getElementById('nav-menu');
+            var expanded = menu.classList.toggle('hidden') === false;
+            this.setAttribute('aria-expanded', expanded);
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

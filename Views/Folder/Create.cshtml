@@ -1,0 +1,28 @@
+@model StudySpeech.Models.FolderModel
+
+@{
+    ViewData["Title"] = "Create Folder";
+}
+@*
+    This view is used to create a new folder. It displays a form where the user can enter the folder name and submit it to create the folder.
+*@
+<div class="mx-auto max-w-lg rounded-xl bg-white p-6 shadow-sm">
+    <h1 class="text-xl font-bold text-teal-900">Create Folder</h1>
+
+    <form asp-action="Create" method="post" class="mt-4 flex flex-col gap-4">
+        <div asp-validation-summary="ModelOnly" class="text-sm text-red-600"></div>
+        <div>
+            <label asp-for="Name" class="mb-1 block text-sm font-medium text-gray-700"></label>
+            <input asp-for="Name" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-300" />
+            <span asp-validation-for="Name" class="text-sm text-red-600"></span>
+        </div>
+        <div class="flex items-center gap-3">
+            <input type="submit" value="Create" class="cursor-pointer rounded-full bg-teal-800 px-5 py-2 text-sm font-medium text-white hover:bg-teal-900" />
+            <a asp-action="Index" class="text-sm text-gray-600 hover:text-gray-900">Back to List</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
