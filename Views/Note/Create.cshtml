@@ -7,25 +7,25 @@
 }
 
 <div class="mx-auto max-w-lg rounded-xl bg-white p-6 shadow-sm">
-    <h1 class="text-xl font-bold text-teal-900">Create Note</h1>
+    <h1 class="text-xl font-bold text-primary">Create Note</h1>
 
     <form asp-action="Create" method="post" class="mt-4 flex flex-col gap-4">
         <div>
             <label asp-for="Title" class="mb-1 block text-sm font-medium text-gray-700"></label>
-            <input asp-for="Title" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-300" />
+            <input asp-for="Title" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40" />
             <span asp-validation-for="Title" class="text-sm text-red-600"></span>
         </div>
 
         <div>
             <label asp-for="Content" class="mb-1 block text-sm font-medium text-gray-700"></label>
-            <textarea asp-for="Content" rows="6" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-300"></textarea>
+            <textarea asp-for="Content" rows="6" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40"></textarea>
             <span asp-validation-for="Content" class="text-sm text-red-600"></span>
         </div>
 
         <div>
             <label class="mb-1 block text-sm font-medium text-gray-700">Folder</label>
             <select asp-for="FolderId" asp-items="ViewBag.Folders"
-                    class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-300">
+                    class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40">
                 <option value="">-- No folder --</option>
             </select>
         </div>
@@ -33,12 +33,12 @@
         <div>
             <label class="mb-1 block text-sm font-medium text-gray-700">Tags</label>
             <select asp-for="SelectedTagIds" asp-items="ViewBag.Tags" multiple
-                    class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-300">
+                    class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40">
             </select>
         </div>
 
         <div class="flex items-center gap-3">
-            <button type="submit" class="rounded-full bg-teal-800 px-5 py-2 text-sm font-medium text-white hover:bg-teal-900">Create</button>
+            <button type="submit" class="rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Create</button>
             <a asp-action="Index" class="text-sm text-gray-600 hover:text-gray-900">Cancel</a>
         </div>
     </form>

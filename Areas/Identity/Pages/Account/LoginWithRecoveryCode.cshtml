@@ -5,7 +5,7 @@
 }
 
 <div class="mx-auto max-w-lg rounded-xl bg-white p-6 shadow-sm">
-    <h1 class="text-xl font-bold text-indigo-900">@ViewData["Title"]</h1>
+    <h1 class="text-xl font-bold text-primary">@ViewData["Title"]</h1>
     <p class="mt-1 text-sm text-gray-600">
         You have requested to log in with a recovery code. This login will not be remembered until you provide
         an authenticator app code at log in or disable 2FA and log in again.
@@ -14,10 +14,10 @@
         <div asp-validation-summary="ModelOnly" class="text-sm text-red-600" role="alert"></div>
         <div>
             <label asp-for="Input.RecoveryCode" class="mb-1 block text-sm font-medium text-gray-700"></label>
-            <input asp-for="Input.RecoveryCode" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300" autocomplete="off" placeholder="RecoveryCode" />
+            <input asp-for="Input.RecoveryCode" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40" autocomplete="off" placeholder="RecoveryCode" />
             <span asp-validation-for="Input.RecoveryCode" class="text-sm text-red-600"></span>
         </div>
-        <button type="submit" class="w-full rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Log in</button>
+        <button type="submit" class="w-full rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Log in</button>
     </form>
 </div>
 

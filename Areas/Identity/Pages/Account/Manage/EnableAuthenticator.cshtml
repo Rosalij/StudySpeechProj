@@ -6,23 +6,23 @@
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
-<h3 class="font-semibold text-indigo-900">@ViewData["Title"]</h3>
+<h3 class="font-semibold text-primary">@ViewData["Title"]</h3>
 <div class="mt-4">
     <p class="text-sm text-gray-600">To use an authenticator app go through the following steps:</p>
     <ol class="mt-2 flex list-decimal flex-col gap-4 pl-5 text-sm text-gray-600">
         <li>
             <p>
                 Download a two-factor authenticator app like Microsoft Authenticator for
-                <a class="text-indigo-700 hover:underline" href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a> and
-                <a class="text-indigo-700 hover:underline" href="https://go.microsoft.com/fwlink/?Linkid=825073">iOS</a> or
+                <a class="text-primary hover:underline" href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a> and
+                <a class="text-primary hover:underline" href="https://go.microsoft.com/fwlink/?Linkid=825073">iOS</a> or
                 Google Authenticator for
-                <a class="text-indigo-700 hover:underline" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en">Android</a> and
-                <a class="text-indigo-700 hover:underline" href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">iOS</a>.
+                <a class="text-primary hover:underline" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en">Android</a> and
+                <a class="text-primary hover:underline" href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">iOS</a>.
             </p>
         </li>
         <li>
             <p>Scan the QR Code or enter this key <code class="rounded-md bg-gray-100 px-2 py-1 font-mono text-sm">@Model.SharedKey</code> into your two factor authenticator app. Spaces and casing do not matter.</p>
-            <div class="mt-2 rounded-md bg-indigo-50 border border-indigo-200 px-4 py-3 text-sm text-indigo-800">Learn how to <a class="text-indigo-700 hover:underline" href="https://go.microsoft.com/fwlink/?Linkid=852423">enable QR code generation</a>.</div>
+            <div class="mt-2 rounded-md bg-primary/5 border border-primary/20 px-4 py-3 text-sm text-primary">Learn how to <a class="text-primary hover:underline" href="https://go.microsoft.com/fwlink/?Linkid=852423">enable QR code generation</a>.</div>
             <div id="qrCode" class="mt-2"></div>
             <div id="qrCodeData" data-url="@Model.AuthenticatorUri"></div>
         </li>
@@ -34,10 +34,10 @@
             <form id="send-code" method="post" class="mt-2 flex flex-col gap-4">
                 <div>
                     <label asp-for="Input.Code" class="mb-1 block text-sm font-medium text-gray-700">Verification Code</label>
-                    <input asp-for="Input.Code" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300" autocomplete="off" placeholder="Please enter the code." />
+                    <input asp-for="Input.Code" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40" autocomplete="off" placeholder="Please enter the code." />
                     <span asp-validation-for="Input.Code" class="text-sm text-red-600"></span>
                 </div>
-                <button type="submit" class="w-full rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Verify</button>
+                <button type="submit" class="w-full rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Verify</button>
                 <div asp-validation-summary="ModelOnly" class="text-sm text-red-600" role="alert"></div>
             </form>
         </li>

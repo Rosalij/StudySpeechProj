@@ -7,7 +7,7 @@
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
-<h3 class="font-semibold text-indigo-900">@ViewData["Title"]</h3>
+<h3 class="font-semibold text-primary">@ViewData["Title"]</h3>
 @{
     var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
     @if (consentFeature?.CanTrack ?? true)
@@ -18,21 +18,21 @@
             {
                 <div class="mt-4 rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-800">
                     <strong>You have no recovery codes left.</strong>
-                    <p class="mt-1">You must <a class="text-indigo-700 hover:underline" asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
+                    <p class="mt-1">You must <a class="text-primary hover:underline" asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
                 </div>
             }
             else if (Model.RecoveryCodesLeft == 1)
             {
                 <div class="mt-4 rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-800">
                     <strong>You have 1 recovery code left.</strong>
-                    <p class="mt-1">You can <a class="text-indigo-700 hover:underline" asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
+                    <p class="mt-1">You can <a class="text-primary hover:underline" asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
                 </div>
             }
             else if (Model.RecoveryCodesLeft <= 3)
             {
                 <div class="mt-4 rounded-md bg-yellow-50 border border-yellow-200 px-4 py-3 text-sm text-yellow-800">
                     <strong>You have @Model.RecoveryCodesLeft recovery codes left.</strong>
-                    <p class="mt-1">You should <a class="text-indigo-700 hover:underline" asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
+                    <p class="mt-1">You should <a class="text-primary hover:underline" asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
                 </div>
             }
 
@@ -40,24 +40,24 @@
                 @if (Model.IsMachineRemembered)
                 {
                     <form method="post" class="inline-block">
-                        <button type="submit" class="rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Forget this browser</button>
+                        <button type="submit" class="rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Forget this browser</button>
                     </form>
                 }
-                <a asp-page="./Disable2fa" class="rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Disable 2FA</a>
-                <a asp-page="./GenerateRecoveryCodes" class="rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Reset recovery codes</a>
+                <a asp-page="./Disable2fa" class="rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Disable 2FA</a>
+                <a asp-page="./GenerateRecoveryCodes" class="rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Reset recovery codes</a>
             </div>
         }
 
-        <h4 class="mt-6 font-semibold text-indigo-900">Authenticator app</h4>
+        <h4 class="mt-6 font-semibold text-primary">Authenticator app</h4>
         <div class="mt-2 flex flex-wrap gap-2">
             @if (!Model.HasAuthenticator)
             {
-                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Add authenticator app</a>
+                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Add authenticator app</a>
             }
             else
             {
-                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Set up authenticator app</a>
-                <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Reset authenticator app</a>
+                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Set up authenticator app</a>
+                <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Reset authenticator app</a>
             }
         </div>
     }

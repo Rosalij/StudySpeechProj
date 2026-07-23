@@ -5,10 +5,10 @@
 }
 
 <div class="mx-auto max-w-lg rounded-xl bg-white p-6 shadow-sm">
-    <h1 class="text-xl font-bold text-indigo-900">@ViewData["Title"]</h1>
+    <h1 class="text-xl font-bold text-primary">@ViewData["Title"]</h1>
     <h2 id="external-login-title" class="mt-1 text-sm text-gray-600">Associate your @Model.ProviderDisplayName account.</h2>
 
-    <p id="external-login-description" class="mt-4 rounded-md bg-indigo-50 border border-indigo-200 px-4 py-3 text-sm text-indigo-800">
+    <p id="external-login-description" class="mt-4 rounded-md bg-primary/5 border border-primary/20 px-4 py-3 text-sm text-primary">
         You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
         Please enter an email address for this site below and click the Register button to finish
         logging in.
@@ -18,10 +18,10 @@
         <div asp-validation-summary="ModelOnly" class="text-sm text-red-600" role="alert"></div>
         <div>
             <label asp-for="Input.Email" class="mb-1 block text-sm font-medium text-gray-700"></label>
-            <input asp-for="Input.Email" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300" autocomplete="email" placeholder="Please enter your email." />
+            <input asp-for="Input.Email" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/40" autocomplete="email" placeholder="Please enter your email." />
             <span asp-validation-for="Input.Email" class="text-sm text-red-600"></span>
         </div>
-        <button type="submit" class="w-full rounded-full bg-indigo-800 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-900">Register</button>
+        <button type="submit" class="w-full rounded-full bg-primary px-5 py-2 text-sm font-medium text-white hover:brightness-90">Register</button>
     </form>
 </div>
 

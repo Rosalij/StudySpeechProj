@@ -11,18 +11,18 @@
 }
 
 <div class="flex flex-col gap-6 md:flex-row">
-    <aside class="w-full shrink-0 rounded-xl bg-teal-900 p-5 text-teal-100 md:w-64">
+    <aside class="w-full shrink-0 rounded-xl bg-primary p-5 text-white/80 md:w-64">
         <a asp-action="Create"
-           class="mb-6 flex items-center gap-2 text-lg font-semibold text-orange-300 hover:text-orange-200">
+           class="mb-6 flex items-center gap-2 text-lg font-semibold text-accent hover:text-accent/80">
             Add note..
-            <span class="flex h-6 w-6 items-center justify-center rounded-full border-2 border-orange-300 text-sm leading-none">+</span>
+            <span class="flex h-6 w-6 items-center justify-center rounded-full border-2 border-accent text-sm leading-none">+</span>
         </a>
 
         <h2 class="mb-2 font-bold text-white">Folders:</h2>
         <ul class="mb-6 space-y-1 text-sm">
             @if (!folders.Any())
             {
-                <li class="italic text-teal-300">No folders yet</li>
+                <li class="italic text-white/60">No folders yet</li>
             }
             @foreach (var folder in folders)
             {
@@ -32,13 +32,13 @@
                        asp-route-searchString="@currentSearch"
                        asp-route-tagId="@currentTag"
                        asp-route-folderId="@folder.Id"
-                       class="@(currentFolder == folder.Id ? "font-semibold text-orange-300" : "text-teal-200 hover:text-white")">
+                       class="@(currentFolder == folder.Id ? "font-semibold text-accent" : "text-white/70 hover:text-white")">
                         @folder.Name
                     </a>
                     <form asp-controller="Folder" asp-action="Delete" asp-route-id="@folder.Id" method="post"
                           onsubmit="return confirm('Delete folder &quot;@folder.Name&quot;? Notes inside it will not be deleted.');">
                         <input type="hidden" name="returnUrl" value="@Url.Action("Index", "Note")" />
-                        <button type="submit" title="Delete folder" class="text-teal-400 hover:text-red-400">
+                        <button type="submit" title="Delete folder" class="text-white/50 hover:text-red-400">
                             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </form>
@@ -48,13 +48,13 @@
             {
                 <li>
                     <a asp-action="Index" asp-route-sortOrder="@currentSort" asp-route-searchString="@currentSearch" asp-route-tagId="@currentTag"
-                       class="text-teal-300 underline hover:text-white">Clear filter</a>
+                       class="text-white/60 underline hover:text-white">Clear filter</a>
                 </li>
             }
         </ul>
 
         <a asp-controller="Folder" asp-action="Create"
-           class="mb-6 inline-block rounded-full bg-teal-200 px-4 py-2 text-sm font-medium text-teal-900 hover:bg-teal-100">
+           class="mb-6 inline-block rounded-full bg-white px-4 py-2 text-sm font-medium text-primary hover:bg-white/90">
             Add folder
         </a>
 
@@ -62,7 +62,7 @@
         <ul class="mb-6 space-y-1 text-sm">
             @if (!tags.Any())
             {
-                <li class="italic text-teal-300">No tags yet</li>
+                <li class="italic text-white/60">No tags yet</li>
             }
             @foreach (var tag in tags)
             {
@@ -72,13 +72,13 @@
                        asp-route-searchString="@currentSearch"
                        asp-route-tagId="@tag.Id"
                        asp-route-folderId="@currentFolder"
-                       class="@(currentTag == tag.Id ? "font-semibold text-orange-300" : "text-teal-200 hover:text-white")">
+                       class="@(currentTag == tag.Id ? "font-semibold text-accent" : "text-white/70 hover:text-white")">
                         #@tag.Name
                     </a>
                     <form asp-controller="Tag" asp-action="Delete" asp-route-id="@tag.Id" method="post"
                           onsubmit="return confirm('Delete tag #@tag.Name? It will be removed from all notes.');">
                         <input type="hidden" name="returnUrl" value="@Url.Action("Index", "Note")" />
-                        <button type="submit" title="Delete tag" class="text-teal-400 hover:text-red-400">
+                        <button type="submit" title="Delete tag" class="text-white/50 hover:text-red-400">
                             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </form>
@@ -88,22 +88,22 @@
             {
                 <li>
                     <a asp-action="Index" asp-route-sortOrder="@currentSort" asp-route-searchString="@currentSearch" asp-route-folderId="@currentFolder"
-                       class="text-teal-300 underline hover:text-white">Clear filter</a>
+                       class="text-white/60 underline hover:text-white">Clear filter</a>
                 </li>
             }
         </ul>
 
         <a asp-controller="Tag" asp-action="Create"
-           class="inline-block rounded-full bg-teal-200 px-4 py-2 text-sm font-medium text-teal-900 hover:bg-teal-100">
+           class="inline-block rounded-full bg-white px-4 py-2 text-sm font-medium text-primary hover:bg-white/90">
             Add custom tags
         </a>
     </aside>
 
-    <section class="flex-1 rounded-xl bg-teal-100/60 p-5">
+    <section class="flex-1 rounded-xl bg-primary/10 p-5">
         <form asp-action="Index" method="get" class="mb-4 flex flex-wrap items-center justify-between gap-3">
             <input type="hidden" name="tagId" value="@currentTag" />
             <input type="hidden" name="folderId" value="@currentFolder" />
-            <div class="flex items-center gap-2 text-sm text-teal-900">
+            <div class="flex items-center gap-2 text-sm text-primary">
                 <span>Sort by</span>
                 <a asp-action="Index" asp-route-sortOrder="newest" asp-route-searchString="@currentSearch" asp-route-tagId="@currentTag" asp-route-folderId="@currentFolder"
                    class="@(currentSort == "newest" ? "font-bold underline" : "hover:underline")">Newest</a>
@@ -112,23 +112,23 @@
                    class="@(currentSort == "oldest" ? "font-bold underline" : "hover:underline")">Oldest</a>
             </div>
             <div class="flex items-center gap-2">
-                <label for="searchString" class="text-sm font-medium text-teal-900">Search:</label>
+                <label for="searchString" class="text-sm font-medium text-primary">Search:</label>
                 <input id="searchString" type="text" name="searchString" value="@currentSearch" placeholder="Search notes..."
-                       class="w-48 rounded-full bg-teal-200/70 px-3 py-1 text-sm text-teal-900 placeholder-teal-500/80 focus:outline-none focus:ring-2 focus:ring-teal-400 sm:w-64" />
+                       class="w-48 rounded-full bg-primary/10 px-3 py-1 text-sm text-primary placeholder-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/50 sm:w-64" />
             </div>
         </form>
 
         <div class="flex flex-col gap-4">
             @if (!Model.Any())
             {
-                <p class="text-teal-800">No notes found. Click "Add note.." to create your first one.</p>
+                <p class="text-primary">No notes found. Click "Add note.." to create your first one.</p>
             }
             @foreach (var item in Model)
             {
-                <div class="relative rounded-md border border-yellow-300 bg-yellow-100 p-4 pr-16 shadow-sm">
+                <div class="relative rounded-md border border-secondary bg-highlight p-4 pr-16 shadow-sm">
                     <div class="absolute right-3 top-3 flex items-center gap-3">
-                        <input type="checkbox" class="h-4 w-4 accent-teal-800" />
-                        <a asp-action="Edit" asp-route-id="@item.Id" title="Edit note" class="text-gray-600 hover:text-teal-700">
+                        <input type="checkbox" class="h-4 w-4 accent-primary" />
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Edit note" class="text-gray-600 hover:text-primary">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 19.5H4.5" /></svg>
                         </a>
                         <a asp-action="Delete" asp-route-id="@item.Id" title="Delete note" class="text-gray-600 hover:text-red-600">
@@ -136,12 +136,12 @@
                         </a>
                     </div>
 
-                    <h3 class="pr-6 font-semibold text-teal-950">
+                    <h3 class="pr-6 font-semibold text-primary">
                         @item.Title
                     </h3>
                     @if (item.Folder != null)
                     {
-                        <p class="mt-0.5 flex items-center gap-1 text-xs font-medium text-teal-700">
+                        <p class="mt-0.5 flex items-center gap-1 text-xs font-medium text-primary">
                             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" /></svg>
                             @item.Folder.Name
                         </p>
@@ -153,7 +153,7 @@
                         <div class="mt-2 flex flex-wrap gap-1">
                             @foreach (var noteTag in item.NoteTags)
                             {
-                                <span class="rounded-full bg-yellow-200 px-2 py-0.5 text-xs text-teal-900">#@noteTag.Tag.Name</span>
+                                <span class="rounded-full bg-highlight px-2 py-0.5 text-xs text-primary">#@noteTag.Tag.Name</span>
                             }
                         </div>
                     }

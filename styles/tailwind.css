@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/*
+  Custom brand colors: flat, single values, no shade scales (max 4 colors).
+  Change the whole site's colors by editing the values here.
+
+  primary   - main brand color: nav, headings, buttons, links
+  accent    - call-to-action emphasis: "Add note..", active filters
+  secondary - borders and subtle secondary UI
+  highlight - note card / tag chip background tint
+*/
+@theme {
+  --color-primary: #485696;
+  --color-accent: #edd382;
+  --color-secondary: #afc2d5;
+  --color-highlight: #f2f3ae;
+}
+
 html {
   position: relative;
   min-height: 100%;
