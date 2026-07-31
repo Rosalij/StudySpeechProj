@@ -10,10 +10,10 @@
   highlight - note card / tag chip background tint
 */
 @theme {
-  --color-primary: #485696;
-  --color-accent: #edd382;
-  --color-secondary: #afc2d5;
-  --color-highlight: #f2f3ae;
+  --color-primary: #7253B8;
+  --color-accent: #333589;
+  --color-secondary: #333589;
+  --color-highlight: #FAE599;
 }
 
 html {

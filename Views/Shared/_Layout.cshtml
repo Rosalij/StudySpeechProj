@@ -23,12 +23,15 @@ it contains the common structure and styling for all pages. *@
                 </svg>
             </button>
 
-            <div id="nav-menu" class="hidden w-full flex-col gap-4 sm:flex sm:w-auto sm:flex-row sm:items-center sm:gap-8">
-                <ul class="flex flex-col gap-2 text-sm font-medium text-primary sm:flex-row sm:items-center sm:gap-6">
+            <div id="nav-menu" class="hidden w-full flex-col gap-2 sm:flex sm:w-auto sm:flex-row sm:gap-4">
+                <ul class="flex flex-col gap-2 text-sm font-medium text-primary sm:flex-row sm:gap-6">
                     <li><a class="hover:text-primary/70" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a class="hover:text-primary/70" asp-area="" asp-controller="Note" asp-action="Index">Notes</a></li>
-                    <li><a class="hover:text-primary/70" asp-area="" asp-controller="Folder" asp-action="Index">Folders</a></li>
-                    <li><a class="hover:text-primary/70" asp-area="" asp-controller="Tag" asp-action="Index">Tags</a></li>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <li><a class="hover:text-primary/70" asp-area="" asp-controller="Note" asp-action="Index">Notes</a></li>
+                        <li><a class="hover:text-primary/70" asp-area="" asp-controller="Folder" asp-action="Index">Folders</a></li>
+                        <li><a class="hover:text-primary/70" asp-area="" asp-controller="Tag" asp-action="Index">Tags</a></li>
+                    }
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

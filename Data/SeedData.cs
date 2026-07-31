@@ -22,13 +22,13 @@ public static class SeedData
             },
             new
             {
-                Title = "Big O Cheat Sheet",
+                Title = "Big Exam Cheat Sheet",
                 Content = "O(1) constant, O(log n) binary search, O(n) linear scan, O(n log n) sorting, O(n^2) nested loops. Always check the worst case before optimizing.",
                 Tags = new[] { "algorithms", "cs" }
             },
             new
             {
-                Title = "French Verb Conjugation",
+                Title = "French lesson script",
                 Content = "-er verbs: je parle, tu parles, il/elle parle, nous parlons, vous parlez, ils/elles parlent. Practice out loud, then listen back with AI speech.",
                 Tags = new[] { "french", "language" }
             }

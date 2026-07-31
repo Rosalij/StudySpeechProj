@@ -5,8 +5,8 @@
     bool isSignedIn = User.Identity?.IsAuthenticated ?? false;
 }
 
-<div class="mx-auto max-w-2xl rounded-xl bg-white p-10 text-center shadow-sm">
-    <h1 class="text-3xl font-bold text-primary">Welcome to StudySpeech</h1>
+<div class="mx-auto max-w-2xl  bg-white p-10 text-center shadow-sm">
+    <h1 class="text-3xl font-bold text-secondary">Welcome to StudySpeech</h1>
     <p class="mt-3 text-gray-600">
         Your go-to solution for taking notes. Take notes, tag them or organize them into your own note folders, and have them read back to you with AI text-to-speech for better learning.
     </p>
@@ -21,11 +21,11 @@
     {
         <div class="mt-6 flex items-center justify-center gap-3">
             <a asp-area="Identity" asp-page="/Account/Register"
-               class="rounded-full bg-primary px-6 py-2 text-sm font-medium text-white hover:brightness-90">
-                Create a free account
+               class="rounded-full bg-highlight px-6 py-2 text-sm font-medium text-secondary hover:brightness-90">
+                Create an account
             </a>
             <a asp-area="Identity" asp-page="/Account/Login"
-               class="rounded-full border border-primary/20 px-6 py-2 text-sm font-medium text-primary hover:bg-primary/5">
+               class="rounded-full border bg-secondary border-primary/20 px-6 py-2 text-sm font-medium text-white hover:brightness-90">
                 Log in
             </a>
         </div>
@@ -39,11 +39,11 @@
         <div class="flex flex-col gap-4">
             @foreach (var note in Model)
             {
-                <div class="relative rounded-md border border-secondary bg-highlight p-4 pr-16 shadow-sm">
-                    <h3 class="font-semibold text-primary">
+                <div class="relative bg-highlight p-4 pr-16 shadow-sm">
+                    <h3 class="font-semibold text-secondary">
                         @note.Title
                     </h3>
-                    <p class="mt-1 text-sm text-gray-700">@note.Content</p>
+                    <p class="mt-1 text-m text-gray-700">@note.Content</p>
 
                     @if (note.NoteTags.Any())
                     {

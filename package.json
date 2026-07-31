@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "tailwindcss -i ./styles/tailwind.css -o ./wwwroot/css/site.css --minify",
-    "watch:css": "tailwindcss -i ./styles/tailwind.css -o ./wwwroot/css/site.css --watch"
+    "watch:css": "tailwindcss -i ./styles/tailwind.css -o ./wwwroot/css/site.css --watch",
+    "dev": "concurrently -n css,dotnet -c cyan,magenta \"npm:watch:css\" \"dotnet watch run\""
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/Rosalij/StudySpeechProj#readme",
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
+    "concurrently": "^10.0.4",
     "tailwindcss": "^4.3.3"
   }
 }
