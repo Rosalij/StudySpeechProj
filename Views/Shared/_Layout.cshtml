@@ -12,20 +12,26 @@ it contains the common structure and styling for all pages. *@
     <link rel="stylesheet" href="~/StudySpeech.styles.css" asp-append-version="true" />
 </head>
 <body class="flex min-h-screen flex-col bg-primary/5 text-gray-900">
+  @* The header contains the navigation bar with links to different sections of the application. *@
     <header class="border-b border-gray-200 bg-white">
         <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             <a class="text-xl font-bold text-primary" asp-area="" asp-controller="Home" asp-action="Index">StudySpeech</a>
 
+@* The navigation toggle button is used for responsive design, allowing users to expand or collapse the navigation menu on smaller screens. *@
             <button id="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"
                     class="rounded-md p-2 text-primary hover:bg-primary/10 sm:hidden">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
-
-            <div id="nav-menu" class="hidden w-full flex-col gap-2 sm:flex sm:w-auto sm:flex-row sm:gap-4">
+@* The navigation menu is displayed on larger screens and contains links to different sections of the application. *@
+            <div id="nav-menu" class="hidden fixed top-14 right-0 bottom-0 z-40 w-1/2 flex-col gap-2 overflow-y-auto border-l border-gray-200 bg-white p-4 shadow-lg sm:static sm:top-auto sm:right-auto sm:bottom-auto sm:z-auto sm:flex sm:w-auto sm:flex-row sm:gap-4 sm:overflow-visible sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
                 <ul class="flex flex-col gap-2 text-sm font-medium text-primary sm:flex-row sm:gap-6">
                     <li><a class="hover:text-primary/70" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    @*
+                        The following links are only displayed if the user is authenticated. 
+                        They provide access to the Notes, Folders, and Tags sections of the application.
+                    *@
                     @if (User.Identity?.IsAuthenticated == true)
                     {
                         <li><a class="hover:text-primary/70" asp-area="" asp-controller="Note" asp-action="Index">Notes</a></li>
@@ -37,18 +43,20 @@ it contains the common structure and styling for all pages. *@
             </div>
         </div>
     </header>
-
+@* The main section of the layout is where the content of each page is rendered. *@
     <main role="main" class="mx-auto w-full max-w-6xl flex-1 px-4 py-6">
         @RenderBody()
     </main>
 
     <footer class="border-t border-gray-200 py-4 text-center text-sm text-gray-500">
-        &copy; 2026 - StudySpeech - <a class="hover:text-primary" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2026 - StudySpeech
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
+        @* The following script handles the toggle functionality of the navigation menu on smaller screens. 
+        When the toggle button is clicked, it shows or hides the navigation menu and updates the aria-expanded attribute accordingly. *@
         document.getElementById('nav-toggle').addEventListener('click', function () {
             var menu = document.getElementById('nav-menu');
             var expanded = menu.classList.toggle('hidden') === false;
