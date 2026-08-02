@@ -4,12 +4,17 @@
     ViewData["Title"] = "Home Page";
     bool isSignedIn = User.Identity?.IsAuthenticated ?? false;
 }
-
+@*
+    The home page provides an introduction to the StudySpeech application. It includes a welcome message, a brief description of the application's features, and a list of sample notes for users to explore. If the user is signed in, they are provided with a link to their notes; otherwise, they are prompted to create an account or log in.
+*@
 <div class="mx-auto max-w-2xl  bg-white p-10 text-center shadow-sm">
     <h1 class="text-3xl font-bold text-secondary">Welcome to StudySpeech</h1>
     <p class="mt-3 text-gray-600">
         Your go-to solution for taking notes. Take notes, tag them or organize them into your own note folders, and have them read back to you with AI text-to-speech for better learning.
     </p>
+    @*
+        If the user is signed in, they are provided with a link to their notes. If not, they are prompted to create an account or log in.
+    *@
     @if (isSignedIn)
     {
         <a asp-controller="Note" asp-action="Index"
@@ -32,6 +37,9 @@
     }
 </div>
 
+@*
+    If the user is not signed in and there are sample notes available, display them in a list format. Each note includes its title, content, and associated tags. Users can listen to the notes using AI text-to-speech by clicking the "Listen with AI" button.
+*@
 @if (!isSignedIn && Model.Any())
 {
     <div class="mx-auto mt-8 max-w-3xl">
@@ -54,7 +62,7 @@
                             }
                         </div>
                     }
-
+@* Display the AI text-to-speech button and audio player for each sample note *@
                     <div class="absolute right-3 top-3 flex items-center gap-2">
                         <button type="button" class="speak-sample-btn" data-id="@note.Id" title="Listen with AI">
                             <img src="~/soundicon.png" alt="Listen with AI" class="h-8 w-8" />
@@ -66,6 +74,7 @@
         </div>
     </div>
 
+@* Display the AI text-to-speech button and audio player for each sample note *@
     @section Scripts {
         <script>
             document.querySelectorAll(".speak-sample-btn").forEach(function (btn) {
