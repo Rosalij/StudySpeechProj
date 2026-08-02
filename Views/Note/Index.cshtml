@@ -188,21 +188,19 @@
                                 }
                             </div>
                         }
-                        @* Speak button *@
-                        <div class="mt-2 flex items-center justify-between">
-
-                            <a asp-action="Details" asp-route-id="@item.Id"
-                               class="text-sm text-blue-700 hover:underline">...Read More</a>
-                            <div class="flex items-end gap-2">
-                                <button type="button" class="speak-btn" data-id="@item.Id" title="Listen with AI">
-                                    <img src="~/soundicon.png" alt="Listen with AI" class="h-8 w-8" />
-                                </button>
-                                @* If the user clicks the speak button, hide it and show the audio player. The audio player will
-                        load the audio from the Note/Speak action. *@
-                                <audio class="speak-player hidden h-8 max-w-[220px]" data-id="@item.Id" controls
-                                       preload="none"></audio>
-                            </div>
+                        @* Speak button, placed in the bottom-right corner of the note *@
+                        <div class="absolute bottom-3 right-3 flex items-center justify-end gap-2">
+                            <audio class="speak-player hidden h-8 max-w-[220px]" data-id="@item.Id" controls
+                                   preload="none"></audio>
+                            @* If the user clicks the speak button, hide it and show the audio player. The audio player will
+                    load the audio from the Note/Speak action. *@
+                            <button type="button" class="speak-btn" data-id="@item.Id" title="Listen with AI">
+                                <img src="~/soundicon.png" alt="Listen with AI" class="h-8 w-8" />
+                            </button>
                         </div>
+
+                        <a asp-action="Details" asp-route-id="@item.Id"
+                           class="mt-2 inline-block text-sm text-blue-700 hover:underline">...Read More</a>
                     </div>
                 }
             </div>

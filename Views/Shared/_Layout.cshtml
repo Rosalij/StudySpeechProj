@@ -15,7 +15,10 @@ it contains the common structure and styling for all pages. *@
   @* The header contains the navigation bar with links to different sections of the application. *@
     <header class="border-b border-gray-200 bg-white">
         <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-            <a class="text-xl font-bold text-primary" asp-area="" asp-controller="Home" asp-action="Index">StudySpeech</a>
+            <a class="flex items-center gap-2 text-xl font-bold text-primary" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/soundicon.png" alt="" class="h-6 w-6" />
+                StudySpeech
+            </a>
 
 @* The navigation toggle button is used for responsive design, allowing users to expand or collapse the navigation menu on smaller screens. *@
             <button id="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"
@@ -29,15 +32,14 @@ it contains the common structure and styling for all pages. *@
                 <ul class="flex flex-col items-center gap-2 text-lg font-medium text-primary sm:flex-row sm:items-stretch sm:gap-6 sm:text-sm">
                     <li><a class="hover:text-primary/70" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     @*
-                        The following links are only displayed if the user is authenticated. 
-                        They provide access to the Notes, Folders, and Tags sections of the application.
+                        The following link is only displayed if the user is authenticated.
+                        It provides access to the Notes section of the application.
                     *@
                     @if (User.Identity?.IsAuthenticated == true)
                     {
                         <li><a class="hover:text-primary/70" asp-area="" asp-controller="Note" asp-action="Index">Notes</a></li>
-                        <li><a class="hover:text-primary/70" asp-area="" asp-controller="Folder" asp-action="Index">Folders</a></li>
-                        <li><a class="hover:text-primary/70" asp-area="" asp-controller="Tag" asp-action="Index">Tags</a></li>
-                   <li> <partial name="_LoginPartial" /> </li> }
+                    }
+                   <li> <partial name="_LoginPartial" /> </li>
                 </ul>
               
             </div>
