@@ -10,12 +10,12 @@
     int? currentFolder = ViewBag.CurrentFolder as int?;
 }
 
-<div class="flex flex-col gap-6 md:flex-row">
+<div class="flex flex-col gap-6 md:flex-row justify-center">
     <aside class="w-full shrink-0 rounded-xl bg-primary p-5 text-white/80 md:w-64">
         <a asp-action="Create"
-           class="mb-6 flex items-center gap-2 text-xl font-semibold text-highlight hover:text-highlight/80">
+           class="mb-6 flex justify-center items-center gap-2 text-2xl bg-white text-primary hover:text-primary/80  rounded-full border-2 hover: bg-white/90">
             Add note..
-            <span class="flex h-6 w-6 items-center justify-center rounded-full border-2 border-accent text-sm leading-none">+</span>
+            <span class="flex h-6 w-6 items-center justify-center rounded-full border-2 border-primary text-sm leading-none">+</span>
         </a>
 
         <h2 class="mb-2 font-bold text-white">Folders:</h2>
@@ -32,7 +32,7 @@
                        asp-route-searchString="@currentSearch"
                        asp-route-tagId="@currentTag"
                        asp-route-folderId="@folder.Id"
-                       class="@(currentFolder == folder.Id ? "font-semibold text-accent" : "text-white/70 hover:text-white")">
+                       class="@(currentFolder == folder.Id ? "font-semibold text-highlight" : "text-white/70 hover:text-white")">
                         @folder.Name
                     </a>
                     <form asp-controller="Folder" asp-action="Delete" asp-route-id="@folder.Id" method="post"
@@ -72,7 +72,7 @@
                        asp-route-searchString="@currentSearch"
                        asp-route-tagId="@tag.Id"
                        asp-route-folderId="@currentFolder"
-                       class="@(currentTag == tag.Id ? "font-semibold text-accent" : "text-white/70 hover:text-white")">
+                       class="@(currentTag == tag.Id ? "font-semibold text-highlight" : "text-white/70 hover:text-white")">
                         #@tag.Name
                     </a>
                     <form asp-controller="Tag" asp-action="Delete" asp-route-id="@tag.Id" method="post"
