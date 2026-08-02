@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using StudySpeech.Data;
 using StudySpeech.Models;
@@ -7,6 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+// The SQLite file's folder must exist before the provider can open it (it won't create missing directories itself).
+var sqliteDataSource = new SqliteConnectionStringBuilder(connectionString).DataSource;
+var sqliteDirectory = Path.GetDirectoryName(sqliteDataSource);
+if (!string.IsNullOrEmpty(sqliteDirectory))
+{
+    Directory.CreateDirectory(sqliteDirectory);
+}
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

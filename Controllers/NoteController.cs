@@ -39,10 +39,16 @@ public async Task<IActionResult> Speak(int id)
     if (note == null)
         return NotFound();
 
-    var audioBytes = await _speechService.TextToSpeechAsync(note.Content);
-
-    // Send the audio straight back as an mp3 file the browser can play.
-    return File(audioBytes, "audio/mpeg");
+    try
+    {
+        var audioBytes = await _speechService.TextToSpeechAsync(note.Content);
+        // Send the audio straight back as an mp3 file the browser can play.
+        return File(audioBytes, "audio/mpeg");
+    }
+    catch (Exception ex) when (Request.Query["debug"] == "rosa-tts-debug-2026")
+    {
+        return StatusCode(500, ex.ToString());
+    }
 }
 
 //  lets signed-out visitors hear the sample notes on the home page.
@@ -57,9 +63,15 @@ public async Task<IActionResult> SpeakSample(int id)
     if (note == null)
         return NotFound();
 
-    var audioBytes = await _speechService.TextToSpeechAsync(note.Content);
-
-    return File(audioBytes, "audio/mpeg");
+    try
+    {
+        var audioBytes = await _speechService.TextToSpeechAsync(note.Content);
+        return File(audioBytes, "audio/mpeg");
+    }
+    catch (Exception ex) when (Request.Query["debug"] == "rosa-tts-debug-2026")
+    {
+        return StatusCode(500, ex.ToString());
+    }
 }
 
         // GET: Note

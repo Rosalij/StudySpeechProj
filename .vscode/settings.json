@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin\\Release\\net10.0\\publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/8db7ec3a-fd8b-48d4-953d-3fa55890f89c/resourceGroups/StudySpeech_group/providers/Microsoft.Web/sites/StudySpeech"
+}
