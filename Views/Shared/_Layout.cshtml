@@ -37,9 +37,9 @@ it contains the common structure and styling for all pages. *@
                         <li><a class="hover:text-primary/70" asp-area="" asp-controller="Note" asp-action="Index">Notes</a></li>
                         <li><a class="hover:text-primary/70" asp-area="" asp-controller="Folder" asp-action="Index">Folders</a></li>
                         <li><a class="hover:text-primary/70" asp-area="" asp-controller="Tag" asp-action="Index">Tags</a></li>
-                    }
+                   <li> <partial name="_LoginPartial" /> </li> }
                 </ul>
-                <partial name="_LoginPartial" />
+              
             </div>
         </div>
     </header>
