@@ -1,6 +1,6 @@
 # Entity-Relationship Diagram
 
-The database has five tables: the four app tables (`Notes`, `Folders`, `Tags`, `NoteTags`) plus ASP.NET Core Identity's `AspNetUsers` table. `AspNetUsers` isn't linked with a real foreign key — `Notes`, `Folders` and `Tags` just store the owning user's id as a plain `UserId` string column, filled in from `UserManager.GetUserId(User)` in the controllers — but I included it below anyway since that's where every `UserId` comes from.
+The database has five tables: the four app tables (`Notes`, `Folders`, `Tags`, `NoteTags`) plus ASP.NET Core Identity's `AspNetUsers` table. 
 
 ```mermaid
 erDiagram
