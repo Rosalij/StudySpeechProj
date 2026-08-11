@@ -15,7 +15,7 @@ StudySpeech is my project for the .NET web development course. It's a study note
 - ASP.NET Core MVC (.NET 10)
 - Entity Framework Core with SQLite
 - ASP.NET Core Identity
-- Microsoft Cognitive Services Speech SDK for the text-to-speech part
+- Microsoft Azure Speech SDK for the text-to-speech part
 - Tailwind CSS 4 (built with `@tailwindcss/cli`)
 
 ## Prerequisites
