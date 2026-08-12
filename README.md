@@ -1,11 +1,11 @@
 # StudySpeech
 
-StudySpeech is my project for the .NET web development course. It's a study notes app where you can write notes, sort them into folders and tags, and have them read out loud with AI text-to-speech (Azure  Speech), if you'd rather listen to your notes than reread them. You can also download the generated speech as an mp3 file. the home page shows three sample notes so people who aren't logged in can still try out the text-to-speech feature before making an account.
+StudySpeech is my project for the .NET web development course. It's a study notes app where you can write notes, sort them into folders and tags, and have them read out loud with AI text-to-speech (Azure  Speech), if you'd rather listen to your notes than reread them, to help with studying on the go. You can also download the generated speech as an mp3 file, for your offline days. the home page shows three sample notes so people who aren't logged in can still try out the text-to-speech feature before making an account.
 
 ## Features
 
 - Register/login (ASP.NET Core Identity, passwords are hashed)
-- Full CRUD on notes, folders and tags — everyone only sees their own stuff
+- Full CRUD on notes, folders and tags
 - Sort notes into folders and tag them
 - Listen to any note with AI-generated speech
 - Download a note's speech as an mp3
