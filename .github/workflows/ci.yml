@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # Node is needed because the build compiles the Tailwind CSS
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install npm packages
+        run: npm ci
+
+      - name: Build and run tests
+        run: dotnet test StudySpeech.Tests/StudySpeech.Tests.csproj --configuration Release
+
+  docker:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build the Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: studyspeech:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Start the container and check that the site answers
+      - name: Smoke test the container
+        run: |
+          docker run -d --name studyspeech -p 8080:8080 studyspeech:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/ > /dev/null; then
+              echo "App is up"
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs studyspeech
+          exit 1
+
+      # Only publish the image when code lands on main (not for pull requests)
+      - name: Log in to GitHub Container Registry
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push the image to GitHub Container Registry
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/rosalij/studyspeechproj:latest
+            ghcr.io/rosalij/studyspeechproj:${{ github.sha }}
+          cache-from: type=gha

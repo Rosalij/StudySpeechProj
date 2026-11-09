@@ -81,3 +81,27 @@ The Azure Speech key/region are set as environment variables in Render's dashboa
 ## Database & ER diagram
 
 See [`docs/er-diagram.md`](docs/er-diagram.md) for the ER diagram and a rundown of each table.
+
+## Tests, CI/CD and Docker
+
+**Tests.** `StudySpeech.Tests` is an xUnit project that runs against an in-memory SQLite database. It covers the seed data, the many-to-many relation between notes and tags, what happens to notes when a folder is deleted, and model validation.
+
+```bash
+dotnet test StudySpeech.Tests/StudySpeech.Tests.csproj
+```
+
+**Pipeline.** A GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push and pull request to `main`:
+
+1. Build the app (including the Tailwind CSS) and run the tests.
+2. Build the Docker image from the `Dockerfile`.
+3. Start the container and check that the site responds (smoke test).
+4. On pushes to `main`, publish the image to GitHub Container Registry (`ghcr.io/rosalij/studyspeechproj`).
+
+**Run it in Docker locally.**
+
+```bash
+docker build -t studyspeech .
+docker run -p 8080:8080 -e AzureSpeech__Key=<key> -e AzureSpeech__Region=<region> studyspeech
+```
+
+Then open http://localhost:8080. Render still deploys the app from the same `Dockerfile`.

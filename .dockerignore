@@ -6,3 +6,6 @@ app.db-shm
 app.db-wal
 .git/
 .vs/
+
+StudySpeech.Tests/
+.github/
